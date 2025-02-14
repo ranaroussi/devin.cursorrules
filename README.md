@@ -1,11 +1,39 @@
-# Devin.cursorrules
+# Transform your $20 Cursor into a Devin-like AI Assistant
 
-Transform your $20 Cursor/Windsurf into a Devin-like experience in one minute! This repository contains configuration files and tools that enhance your Cursor or Windsurf IDE with advanced agentic AI capabilities similar to Devin, including:
+This repository gives you everything needed to supercharge your Cursor or Windsurf IDE with **advanced** agentic AI capabilities — similar to the $500/month Devin—but at a fraction of the cost. In under a minute, you'll gain:
 
-- Process planning and self-evolution
-- Extended tool usage (web browsing, search, LLM-powered analysis)
-- Automated execution (for Windsurf in Docker containers)
+* Automated planning and self-evolution, so your AI "thinks before it acts" and learns from mistakes
+* Extended tool usage, including web browsing, search engine queries, and LLM-driven text/image analysis
+* [Experimental] Multi-agent collaboration, with o1 doing the planning, and regular Claude/GPT-4o doing the execution.
 
+## Why This Matters
+
+Devin impressed many by acting like an intern who writes its own plan, updates that plan as it progresses, and even evolves based on your feedback. But you don't need Devin's $500/month subscription to get most of that functionality. By customizing the .cursorrules file, plus a few Python scripts, you'll unlock the same advanced features inside Cursor.
+
+## Key Highlights
+
+1.	Easy Setup
+   
+   Copy the provided config files into your project folder. Cursor users only need the .cursorrules file. It takes about a minute, and you'll see the difference immediately.
+
+2.	Planner-Executor Multi-Agent (Experimental)
+
+   Our new [multi-agent branch](https://github.com/grapeot/devin.cursorrules/tree/multi-agent) introduces a high-level Planner (powered by o1) that coordinates complex tasks, and an Executor (powered by Claude/GPT) that implements step-by-step actions. This two-agent approach drastically improves solution quality, cross-checking, and iteration speed.
+
+3.	Extended Toolset
+
+   Includes:
+   
+   * Web scraping (Playwright)
+   * Search engine integration (DuckDuckGo)
+   * LLM-powered analysis
+
+   The AI automatically decides how and when to use them (just like Devin).
+
+4.	Self-Evolution
+
+   Whenever you correct the AI, it can update its "lessons learned" in .cursorrules. Over time, it accumulates project-specific knowledge and gets smarter with each iteration. It makes AI a coachable and coach-worthy partner.
+	
 ## Usage
 
 1. Copy all files from this repository to your project folder
@@ -100,11 +128,6 @@ python -m playwright install chromium
 - Search engine integration (DuckDuckGo)
 - LLM-powered text analysis
 - Process planning and self-reflection capabilities
-- Token and cost tracking for LLM API calls
-  - Supports OpenAI (o1, gpt-4o) and Anthropic (Claude-3.5) models
-  - Tracks token usage, costs, and thinking time
-  - Provides session-based tracking with detailed statistics
-  - Command-line interface for viewing usage statistics
 
 ## Testing
 
@@ -115,8 +138,10 @@ The project includes comprehensive unit tests for all tools. To run the tests:
 source venv/bin/activate  # On Windows: .\venv\Scripts\activate
 
 # Run all tests
-PYTHONPATH=. python -m unittest discover tests/
+PYTHONPATH=. pytest -v tests/
 ```
+
+Note: Use `-v` flag to see detailed test output including why tests were skipped (e.g. missing API keys)
 
 The test suite includes:
 - Search engine tests (DuckDuckGo integration)
